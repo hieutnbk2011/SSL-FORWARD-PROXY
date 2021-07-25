@@ -32,5 +32,7 @@ RUN mkdir -p /scripts/startup
 RUN rm -f /etc/nginx/conf.d/*
 COPY src/nginx_conf.d/ /etc/nginx/conf.d/
 COPY src/nginx.conf /etc/nginx/nginx.conf
+RUN rm -rf /var/log/nginx/* && ln -sf /dev/stdout /var/log/nginx/access.log \
+    && ln -sf /dev/stderr /var/log/nginx/error.log
 ENTRYPOINT []
 CMD ["/bin/bash", "/scripts/entrypoint.sh"]

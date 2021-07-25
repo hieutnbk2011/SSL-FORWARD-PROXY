@@ -2,7 +2,7 @@
 
 # Helper function to output error messages to STDERR, with red text
 error() {
-    (set +x; tput -Tscreen bold
+    ( tput -Tscreen bold
     tput -Tscreen setaf 1
     echo $*
     tput -Tscreen sgr0) >&2
@@ -112,10 +112,8 @@ server {
     server_name         $DOMAIN;
     ssl_certificate     /etc/letsencrypt/live/$DOMAIN/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/$DOMAIN/privkey.pem;
-    access_log /var/log/nginx/1.txt;
-    error_log /var/log/nginx/2.txt;
      # dns resolver used by forward proxying
-     resolver  114.114.114.114;
+     resolver  8.8.8.8;
 
      # forward proxy for CONNECT request
      proxy_connect;

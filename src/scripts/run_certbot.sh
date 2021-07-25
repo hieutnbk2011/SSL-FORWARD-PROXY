@@ -10,7 +10,6 @@ if [ -z "$CERTBOT_EMAIL" ]; then
 fi
 
 exit_code=0
-set -x
 # Loop over every domain we can find
 for domain in $(parse_domains); do
     if is_renewal_required $domain; then
@@ -31,5 +30,4 @@ done
 # did indeed get certificates for
 auto_enable_configs
 
-set +x
 exit $exit_code
