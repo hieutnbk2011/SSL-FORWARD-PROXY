@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  forward_proxy:
+     restart: unless-stopped
+     build: .
+     container_name: forward_proxy
+     ports:
+            - 80:80/tcp
+            - 443:443/tcp
+     environment:
+            CERTBOT_EMAIL: hieu.tnbk2011@yahoo.com
+            DOMAIN: proxy1.koinwatch.com
+     volumes:
+          - letsencrypt:/etc/letsencrypt
+volumes:
+    letsencrypt:
