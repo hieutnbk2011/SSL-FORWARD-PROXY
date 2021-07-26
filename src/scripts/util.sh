@@ -113,7 +113,7 @@ server {
     ssl_certificate     /etc/letsencrypt/live/$DOMAIN/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/$DOMAIN/privkey.pem;
      # dns resolver used by forward proxying
-     resolver  8.8.8.8;
+     resolver  $DNS_IP;
 
      # forward proxy for CONNECT request
      proxy_connect;
@@ -123,6 +123,10 @@ server {
      proxy_connect_send_timeout     10s;
 
      # forward proxy for non-CONNECT request
+             location / {
+            proxy_set_header Host \$host;
+            proxy_pass https://\$host;
+        }
 }
 EOF
 }

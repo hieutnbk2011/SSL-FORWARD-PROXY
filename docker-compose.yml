@@ -11,6 +11,7 @@ services:
      environment:
             CERTBOT_EMAIL: hieu.tnbk2011@yahoo.com
             DOMAIN: proxy1.koinwatch.com
+            DNS_IP: 8.8.8.8
      volumes:
           - letsencrypt:/etc/letsencrypt
 volumes:
