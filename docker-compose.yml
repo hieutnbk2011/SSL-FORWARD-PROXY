@@ -14,5 +14,6 @@ services:
             DNS_IP: 8.8.8.8
      volumes:
           - letsencrypt:/etc/letsencrypt
+          - ./.htpasswd:/etc/nginx/.htpasswd  
 volumes:
     letsencrypt:

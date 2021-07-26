@@ -114,7 +114,9 @@ server {
     ssl_certificate_key /etc/letsencrypt/live/$DOMAIN/privkey.pem;
      # dns resolver used by forward proxying
      resolver  $DNS_IP;
-
+     auth_basic           "Proxy Authenticate";
+     auth_basic_user_file /etc/nginx/.htpasswd;
+     rewrite_by_lua_file /etc/nginx/auth.lua;
      # forward proxy for CONNECT request
      proxy_connect;
      proxy_connect_allow            443;
@@ -126,6 +128,9 @@ server {
              location / {
             proxy_set_header Host \$host;
             proxy_pass https://\$host;
+            # If backend wont check Auth header, we should not pass the user/password.
+            proxy_hide_header Authorization;
+            proxy_hide_header Proxy-Authorization;
         }
 }
 EOF
